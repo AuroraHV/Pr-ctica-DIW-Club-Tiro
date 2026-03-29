@@ -116,14 +116,48 @@
 
           <!-- ICONOS Y MENÚ -->
           <div class="flex items-center gap-4">
-            <a
-              href="carrito.html"
-              class="icon-btn"
-              title="Carrito"
-              aria-label="Ver carrito de compra"
-            >
-              <i data-lucide="shopping-cart" aria-hidden="true"></i>
-            </a>
+            <div class="carrito-dropdown-wrapper">
+              <button
+                id="cartToggle"
+                class="icon-btn"
+                type="button"
+                title="Carrito"
+                aria-label="Ver resumen del carrito"
+                aria-expanded="false"
+                aria-controls="cartDropdown"
+              >
+                <i data-lucide="shopping-cart" aria-hidden="true"></i>
+              </button>
+              <div
+                id="cartDropdown"
+                class="cart-dropdown"
+                role="region"
+                aria-label="Resumen del carrito"
+                aria-hidden="true"
+              >
+                <div class="cart-dropdown-header">
+                  <h3 class="cart-dropdown-title">Mi carrito</h3>
+                  <button
+                    type="button"
+                    class="cart-dropdown-close"
+                    aria-label="Cerrar resumen del carrito"
+                  >
+                    ×
+                  </button>
+                </div>
+                <ul class="cart-dropdown-list" data-cart-summary-list></ul>
+                <div class="cart-dropdown-total">
+                  <span>Total</span>
+                  <span data-cart-summary-total>0 €</span>
+                </div>
+                <p class="cart-dropdown-empty" data-cart-summary-empty hidden>
+                  Tu carrito está vacío.
+                </p>
+                <a href="carrito.html" class="btn cart-dropdown-btn"
+                  >Ver carrito completo</a
+                >
+              </div>
+            </div>
             <button
               class="icon-btn"
               title="Usuario"

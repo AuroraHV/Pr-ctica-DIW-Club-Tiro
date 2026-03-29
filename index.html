@@ -20,6 +20,8 @@
     <script src="js/main.js"></script>
     <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Iconos Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <meta
@@ -117,14 +119,48 @@
 
           <!-- ICONOS Y MENÚ -->
           <div class="flex items-center gap-4">
-            <a
-              href="carrito.html"
-              class="icon-btn"
-              title="Carrito"
-              aria-label="Ver carrito de compra"
-            >
-              <i data-lucide="shopping-cart" aria-hidden="true"></i>
-            </a>
+            <div class="carrito-dropdown-wrapper">
+              <button
+                id="cartToggle"
+                class="icon-btn"
+                type="button"
+                title="Carrito"
+                aria-label="Ver resumen del carrito"
+                aria-expanded="false"
+                aria-controls="cartDropdown"
+              >
+                <i data-lucide="shopping-cart" aria-hidden="true"></i>
+              </button>
+              <div
+                id="cartDropdown"
+                class="cart-dropdown"
+                role="region"
+                aria-label="Resumen del carrito"
+                aria-hidden="true"
+              >
+                <div class="cart-dropdown-header">
+                  <h3 class="cart-dropdown-title">Mi carrito</h3>
+                  <button
+                    type="button"
+                    class="cart-dropdown-close"
+                    aria-label="Cerrar resumen del carrito"
+                  >
+                    ×
+                  </button>
+                </div>
+                <ul class="cart-dropdown-list" data-cart-summary-list></ul>
+                <div class="cart-dropdown-total">
+                  <span>Total</span>
+                  <span data-cart-summary-total>0 €</span>
+                </div>
+                <p class="cart-dropdown-empty" data-cart-summary-empty hidden>
+                  Tu carrito está vacío.
+                </p>
+                <a href="carrito.html" class="btn cart-dropdown-btn"
+                  >Ver carrito completo</a
+                >
+              </div>
+            </div>
             <button
               class="icon-btn"
               title="Usuario"
@@ -336,7 +372,9 @@
 
               <p class="mt-4 text-lg">Apunta alto, empieza hoy con nosotros</p>
 
-              <a href="#" class="btn mt-6 px-6 py-3 text-lg">INSCRÍBETE</a>
+              <a href="#" class="btn btn-pulse mt-6 px-6 py-3 text-lg"
+                >INSCRÍBETE</a
+              >
             </div>
           </div>
 
@@ -366,7 +404,9 @@
 
               <p class="mt-4 text-lg">Formación, precisión y disciplina</p>
 
-              <a href="producto.html" class="btn mt-6 px-6 py-3 text-lg"
+              <a
+                href="producto.html"
+                class="btn btn-pulse mt-6 px-6 py-3 text-lg"
                 >VER CURSOS DE TIRO</a
               >
             </div>
@@ -398,7 +438,9 @@
 
               <p class="mt-4 text-lg">Eventos autonómicos y nacionales</p>
 
-              <a href="#" class="btn mt-6 px-6 py-3 text-lg">VER CALENDARIO</a>
+              <a href="#" class="btn btn-pulse mt-6 px-6 py-3 text-lg"
+                >VER CALENDARIO</a
+              >
             </div>
           </div>
 
@@ -455,6 +497,24 @@
         </div>
       </section>
 
+      <!-- ================================= -->
+      <!-- BANNER PUBLICITARIO -->
+      <!-- ================================= -->
+      <section class="py-14 text-center bg-[#E3E3E3] section-destacado">
+        <h2 class="text-2xl font-bold mb-8 text-black titulo-destacado">
+          DESTACADO
+        </h2>
+
+        <div class="flex justify-center">
+          <iframe
+            src="banner/index.html"
+            class="w-[300px] h-[250px] border-0 mx-auto cursor-pointer bg-[#919191]"
+            loading="lazy"
+            title="Banner curso licencia F"
+          ></iframe>
+        </div>
+      </section>
+
       <!-- =============
         NOTICIAS
       ================== -->
@@ -474,7 +534,7 @@
         <div class="grid md:grid-cols-3 gap-8 container mx-auto px-6">
           <!-- Tarjeta 1 -->
           <article
-            class="card-fondo shadow-lg rounded-lg overflow-hidden"
+            class="card-fondo reveal shadow-lg rounded-lg overflow-hidden"
             role="article"
             tabindex="0"
             aria-label="Noticia: Trofeo Armería González y Pelayo. Fecha 2 de octubre de 2025. Competición en el Centro de Tiro de los Juegos del Mediterráneo en Gádor."
@@ -515,7 +575,7 @@
 
           <!-- Tarjeta 2 -->
           <article
-            class="card-fondo shadow-lg rounded-lg overflow-hidden"
+            class="card-fondo reveal shadow-lg rounded-lg overflow-hidden"
             role="article"
             tabindex="0"
             aria-label="Noticia: Tirada Benéfica Standard. Fecha 29 de septiembre de 2025. Evento en beneficio de la asociación ALTEA."
@@ -554,7 +614,7 @@
 
           <!-- Tarjeta 3 -->
           <article
-            class="card-fondo shadow-lg rounded-lg overflow-hidden"
+            class="card-fondo reveal shadow-lg rounded-lg overflow-hidden"
             role="article"
             tabindex="0"
             aria-label="Noticia: Resultados Competición Standard FATO. Fecha 12 de agosto de 2025. Participación destacada y buenos resultados."
@@ -604,7 +664,7 @@
         FRANJA
       ================== -->
       <section
-        class="franja text-center"
+        class="franja franja reveal text-center"
         style="
           --franja-img: url(&quot;../img/franja.jpg&quot;);
           --franja-overlay: rgba(11, 60, 93, 0.55);
@@ -642,12 +702,12 @@
               <img
                 src="img/competiciones.png"
                 alt="Competidor disparando"
-                class="object-cover w-full h-full"
+                class="object-cover w-full h-full reveal-side"
               />
             </div>
 
             <!-- Tabla de competiciones -->
-            <div class="fondo-tabla p-6 md:p-8">
+            <div class="fondo-tabla reveal-zoom p-6 md:p-8">
               <h2
                 class="text-2xl md:text-3xl font-bold uppercase mb-6 border-b-2 border-[#EAC42D] inline-block"
                 role="heading"
@@ -859,6 +919,26 @@
         </div>
       </section>
     </main>
+
+    <!-- ESTADÍSTICAS -->
+    <section class="py-16 bg-[#E3E3E3] text-center section-estadisticas">
+      <h2 class="text-3xl font-bold uppercase mb-10 titulo-estadisticas">
+        Estadísticas del club
+      </h2>
+
+      <p
+        id="anioGrafico"
+        class="mb-8 font-semibold text-gray-700 subtitulo-estadisticas"
+      >
+        Temporada 2024
+      </p>
+
+      <div class="max-w-3xl mx-auto px-6">
+        <canvas id="graficoClub"></canvas>
+
+        <button id="cambiarDatos" class="btn mt-8">Cambiar estadísticas</button>
+      </div>
+    </section>
 
     <!-- ========================================================
           FOOTER

@@ -115,14 +115,48 @@
 
           <!-- ICONOS Y MENÚ -->
           <div class="flex items-center gap-4">
-            <a
-              href="carrito.html"
-              class="icon-btn"
-              title="Carrito"
-              aria-label="Ver carrito de compra"
-            >
-              <i data-lucide="shopping-cart" aria-hidden="true"></i>
-            </a>
+            <div class="carrito-dropdown-wrapper">
+              <button
+                id="cartToggle"
+                class="icon-btn"
+                type="button"
+                title="Carrito"
+                aria-label="Ver resumen del carrito"
+                aria-expanded="false"
+                aria-controls="cartDropdown"
+              >
+                <i data-lucide="shopping-cart" aria-hidden="true"></i>
+              </button>
+              <div
+                id="cartDropdown"
+                class="cart-dropdown"
+                role="region"
+                aria-label="Resumen del carrito"
+                aria-hidden="true"
+              >
+                <div class="cart-dropdown-header">
+                  <h3 class="cart-dropdown-title">Mi carrito</h3>
+                  <button
+                    type="button"
+                    class="cart-dropdown-close"
+                    aria-label="Cerrar resumen del carrito"
+                  >
+                    ×
+                  </button>
+                </div>
+                <ul class="cart-dropdown-list" data-cart-summary-list></ul>
+                <div class="cart-dropdown-total">
+                  <span>Total</span>
+                  <span data-cart-summary-total>0 €</span>
+                </div>
+                <p class="cart-dropdown-empty" data-cart-summary-empty hidden>
+                  Tu carrito está vacío.
+                </p>
+                <a href="carrito.html" class="btn cart-dropdown-btn"
+                  >Ver carrito completo</a
+                >
+              </div>
+            </div>
             <button
               class="icon-btn"
               title="Usuario"
@@ -341,64 +375,192 @@
       </section>
 
       <!-- ========================================================= -->
-      <!--  BLOQUE DESCRIPTIVO  -->
+      <!--  PESTAÑAS BOOTSTRAP  -->
       <!-- ========================================================= -->
       <section
         class="py-14 px-6 md:px-16"
         aria-labelledby="licencia-pistola-heading"
       >
-        <div class="container mx-auto text-gray-800 leading-relaxed">
-          <div>
-            <h3
-              id="licencia-pistola-heading"
-              class="titulo-producto text-2xl md:text-3xl font-bold uppercase mb-5 text-[var(--color-primary)]"
+        <div class="container mx-auto">
+          <h3
+            id="licencia-pistola-heading"
+            class="titulo-producto text-2xl md:text-3xl font-bold uppercase mb-8 text-[var(--color-primary)]"
+          >
+            LICENCIA F - PISTOLA STANDARD 25 M
+          </h3>
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" id="cursoTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="descripcion-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#descripcion-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="descripcion-tab-pane"
+                aria-selected="true"
+              >
+                Descripción
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="precio-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#precio-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="precio-tab-pane"
+                aria-selected="false"
+              >
+                Precio e inscripción
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="ubicacion-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#ubicacion-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="ubicacion-tab-pane"
+                aria-selected="false"
+              >
+                Ubicación
+              </button>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content" id="cursoTabContent">
+            <!-- Pestaña 1: Descripción -->
+            <div
+              class="tab-pane fade show active"
+              id="descripcion-tab-pane"
+              role="tabpanel"
+              aria-labelledby="descripcion-tab"
+              tabindex="0"
             >
-              LICENCIA F - PISTOLA STANDARD 25 M
-            </h3>
-            <p class="descripcion-producto text-gray-800 leading-relaxed mb-1">
-              ¿Quieres dar el primer paso oficial en el mundo del tiro
-              deportivo?
-            </p>
-            <p class="descripcion-producto">
-              Con nuestro curso de
-              <strong>Licencia F para pistola estándar a 25 metros</strong>
-              aprenderás todo lo necesario para obtener la habilitación oficial
-              y disfrutar de este deporte con total seguridad.
-            </p>
-            <p class="descripcion-producto">
-              <br />
-              Este curso está pensado tanto para principiantes que se inician en
-              el tiro deportivo como para quienes desean regularizar su práctica
-              y participar en competiciones oficiales. Durante la formación
-              recibirás:
-            </p>
-            <ul
-              class="descripcion-producto mt-5 space-y-2 list-disc list-inside text-gray-800 mb-3"
+              <p class="descripcion-producto mb-1">
+                ¿Quieres dar el primer paso oficial en el mundo del tiro
+                deportivo?
+              </p>
+              <p class="descripcion-producto">
+                Con nuestro curso de
+                <strong>Licencia F para pistola estándar a 25 metros</strong>
+                aprenderás todo lo necesario para obtener la habilitación
+                oficial y disfrutar de este deporte con total seguridad.
+              </p>
+              <p class="descripcion-producto mt-3">
+                Este curso está pensado tanto para principiantes que se inician
+                en el tiro deportivo como para quienes desean regularizar su
+                práctica y participar en competiciones oficiales. Durante la
+                formación recibirás:
+              </p>
+              <ul
+                class="descripcion-producto mt-4 space-y-2 list-disc list-inside mb-3"
+              >
+                <li>
+                  <strong>Clases teóricas</strong> sobre normativa, seguridad en
+                  el campo de tiro y reglamento vigente.
+                </li>
+                <li>
+                  <strong>Prácticas</strong> supervisadas en nuestras
+                  instalaciones de 25 m, con pistola asignada.
+                </li>
+                <li>
+                  Incluye los derechos para acudir al
+                  <strong>examen oficial</strong> de licencia, tanto teórico
+                  como práctico.
+                </li>
+                <li>
+                  Acompañamiento de instructores titulados, que te guiarán paso
+                  a paso hasta conseguir tu licencia.
+                </li>
+              </ul>
+              <p class="descripcion-producto mt-4">
+                También puedes explorar otros
+                <a href="busqueda.html">cursos de tiro deportivo en Almería</a>
+                que ofrecemos en nuestro club, desde carabina hasta niveles
+                avanzados de precisión.
+              </p>
+            </div>
+
+            <!-- Pestaña 2: Precio e inscripción -->
+            <div
+              class="tab-pane fade"
+              id="precio-tab-pane"
+              role="tabpanel"
+              aria-labelledby="precio-tab"
+              tabindex="0"
             >
-              <li>
-                <strong>Clases teóricas</strong> sobre normativa, seguridad en
-                el campo de tiro y reglamento vigente.
-              </li>
-              <li>
-                <strong>Prácticas</strong> supervisadas en nuestras
-                instalaciones de 25 m, con pistola asignada.
-              </li>
-              <li>
-                Incluye los derechos para acudir al
-                <strong>examen oficial</strong> de licencia, tanto teórico como
-                práctico.
-              </li>
-              <li>
-                Acompañamiento de instructores titulados, que te guiarán paso a
-                paso hasta conseguir tu licencia.
-              </li>
-            </ul>
-            <p class="descripcion-producto mt-4">
-              También puedes explorar otros
-              <a href="busqueda.html">cursos de tiro deportivo en Almería</a>
-              que ofrecemos en nuestro club, desde carabina hasta niveles
-              avanzados de precisión.
-            </p>
+              <p class="descripcion-producto mb-4">
+                El curso tiene un precio de <strong>350 €</strong>, que incluye
+                toda la formación teórica, las prácticas programadas y la
+                orientación para la convocatoria oficial.
+              </p>
+              <ul
+                class="descripcion-producto list-disc list-inside space-y-2 mb-4"
+              >
+                <li>Pago único al formalizar la inscripción.</li>
+                <li>No se requiere abonar aparte los derechos de examen.</li>
+                <li>Plazas limitadas por convocatoria.</li>
+              </ul>
+              <p class="descripcion-producto">
+                Para inscribirte, accede al
+                <a href="#" class="enlace-ubicacion"
+                  >formulario de inscripción</a
+                >. Nuestro equipo se pondrá en contacto contigo para confirmar
+                disponibilidad y asignarte el turno de prácticas.
+              </p>
+            </div>
+
+            <!-- Pestaña 3: Ubicación -->
+            <div
+              class="tab-pane fade"
+              id="ubicacion-tab-pane"
+              role="tabpanel"
+              aria-labelledby="ubicacion-tab"
+              tabindex="0"
+            >
+              <p class="descripcion-producto mb-4">
+                Las clases prácticas se imparten en dos campos de tiro de la
+                provincia de Almería:
+              </p>
+              <ul
+                class="descripcion-producto list-disc list-inside space-y-2 mb-4"
+              >
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/JAphdzb65JCNVdXF9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="enlace-ubicacion"
+                    >Campo de Tiro de Gádor</a
+                  >
+                  — Carretera de Gádor, 04560, Almería. Prácticas los miércoles.
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/LMMb6B6QshFX6gCH6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="enlace-ubicacion"
+                    >Campo de Tiro de Roquetas de Mar</a
+                  >
+                  — Roquetas de Mar, Almería. Prácticas de lunes a jueves.
+                </li>
+              </ul>
+              <p class="descripcion-producto">
+                La parte teórica se realiza por videoconferencia los jueves a
+                partir de las 20:30 h, por lo que no es necesario desplazarse
+                para esa parte del curso.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -429,7 +591,8 @@
           <p class="mt-2 font-bold mt-2" style="font-size: 1.7rem">350 €</p>
           <div class="flex items-center justify-end gap-4">
             <button
-              class="btn icono-circular mt-7"
+              class="btn icono-circular mt-7 js-add-to-cart"
+              data-cart-id="licencia-f-pistola-25m"
               title="Añadir al carrito"
               type="button"
               aria-label="Añadir curso al carrito"
@@ -461,74 +624,392 @@
         </div>
 
         <!-- Grid de tarjetas -->
-        <div class="grid md:grid-cols-2 gap-10 container mx-auto">
+        <div
+          class="grid md:grid-cols-2 gap-10 container mx-auto calendario-grid"
+        >
           <!-- Tarjeta 1 -->
-          <article class="card-fondo">
+          <article class="card-fondo card-calendario">
             <img
               src="img/clases-teoricas.png"
               alt="Clases teóricas del curso de tiro con pistola estándar en Almería"
             />
             <div class="p-5 flex flex-col justify-between h-full">
-              <div>
+              <div class="card-calendario-body">
                 <h3 class="text-center mb-3">CLASES TEÓRICAS ONLINE</h3>
-                <p class="mb-3">
+                <p class="mb-3 card-calendario-resumen">
                   Se realizarán clases teóricas por videoconferencia los jueves
                   a partir de las 20:30 horas, pudiendo resolver dudas también
                   físicamente en el campo de tiro o por teléfono.
                 </p>
-                <ul class="text-[#CC4747] font-semibold mb-3 mt-4 text-left">
-                  <li>• JUEVES 04 SEPTIEMBRE A LAS 20:30.</li>
-                  <li>• JUEVES 11 SEPTIEMBRE A LAS 20:30.</li>
-                </ul>
-                <p class="mb-4">
-                  Se aportará la documentación necesaria así como tests para
-                  practicar, además de una cuenta de usuario para acceder a la
-                  web a dicho material e información de clases y exámenes.
-                </p>
-              </div>
-              <div class="mt-3 flex justify-center">
-                <a href="#" class="btn">DOCUMENTACIÓN</a>
+                <button
+                  type="button"
+                  class="btn btn-mini-toggle js-toggle-extra-info"
+                  aria-expanded="false"
+                  aria-controls="extra-teoricas"
+                >
+                  Leer más
+                </button>
+
+                <div id="extra-teoricas" class="extra-info mt-4" hidden>
+                  <ul class="text-[#CC4747] font-semibold mb-3 mt-4 text-left">
+                    <li>• JUEVES 04 SEPTIEMBRE A LAS 20:30.</li>
+                    <li>• JUEVES 11 SEPTIEMBRE A LAS 20:30.</li>
+                  </ul>
+                  <p class="mb-4">
+                    Se aportará la documentación necesaria así como tests para
+                    practicar, además de una cuenta de usuario para acceder a la
+                    web a dicho material e información de clases y exámenes.
+                  </p>
+                </div>
               </div>
             </div>
           </article>
 
           <!-- Tarjeta 2 -->
-          <article class="card-fondo">
+          <article class="card-fondo card-calendario">
             <img
               src="img/clases-practicas.png"
               alt="Clases prácticas de tiro con pistola estándar en los campos de tiro de Gádor y Roquetas"
             />
             <div class="p-5 flex flex-col justify-between h-full">
-              <div>
+              <div class="card-calendario-body">
                 <h3 class="text-center mb-3">CLASES PRÁCTICAS</h3>
-                <p class="mb-3">
+                <p class="mb-3 card-calendario-resumen">
                   Se realizarán las clases prácticas de una hora en los campos
                   de tiro, tanto de Gádor (miércoles) como de Roquetas (de lunes
                   a jueves), según el día.
                 </p>
-                <ul class="font-semibold mb-5 mt-4 text-left">
-                  <li><strong>ROQUETAS:</strong></li>
-                  <li class="text-[#CC4747]">
-                    • MARTES 02, 09, 26, 23 Y 30 SEPTIEMBRE, y 07 Y 14 OCTUBRE
-                    (16:00 – 19:00).
-                  </li>
-                  <li class="text-[#CC4747]">
-                    • LUNES 08, 15, 22 Y 29 SEPTIEMBRE, Y 06 Y 13 OCTUBRE (10:00
-                    – 11:00).
-                  </li>
-                  <li class="mt-2"><strong>GÁDOR:</strong></li>
-                  <li class="text-[#CC4747]">
-                    • MIÉRCOLES 03, 10, 17, 24 SEPTIEMBRE y 01, 08 Y 15 OCTUBRE
-                    (17:00 – 20:00).
-                  </li>
-                </ul>
-                <p>
-                  El lugar y horario asignado de las prácticas será siempre el
-                  mismo, ya que se asigna el arma para el examen.
-                </p>
+                <button
+                  type="button"
+                  class="btn btn-mini-toggle js-toggle-extra-info"
+                  aria-expanded="false"
+                  aria-controls="extra-practicas"
+                >
+                  Leer más
+                </button>
+
+                <div id="extra-practicas" class="extra-info mt-4" hidden>
+                  <ul class="font-semibold mb-5 mt-4 text-left">
+                    <li><strong>ROQUETAS:</strong></li>
+                    <li class="text-[#CC4747]">
+                      • MARTES 02, 09, 26, 23 Y 30 SEPTIEMBRE, y 07 Y 14 OCTUBRE
+                      (16:00 – 19:00).
+                    </li>
+                    <li class="text-[#CC4747]">
+                      • LUNES 08, 15, 22 Y 29 SEPTIEMBRE, Y 06 Y 13 OCTUBRE
+                      (10:00 – 11:00).
+                    </li>
+                    <li class="mt-2"><strong>GÁDOR:</strong></li>
+                    <li class="text-[#CC4747]">
+                      • MIÉRCOLES 03, 10, 17, 24 SEPTIEMBRE y 01, 08 Y 15
+                      OCTUBRE (17:00 – 20:00).
+                    </li>
+                  </ul>
+                  <p>
+                    El lugar y horario asignado de las prácticas será siempre el
+                    mismo, ya que se asigna el arma para el examen.
+                  </p>
+                </div>
               </div>
             </div>
           </article>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!--  ACORDEÓN INFORMATIVO  -->
+      <!-- ========================================================= -->
+      <section
+        class="py-12 px-6 md:px-16"
+        aria-labelledby="accordion-curso-heading"
+      >
+        <div class="container mx-auto">
+          <div class="text-center mb-10">
+            <h2
+              id="accordion-curso-heading"
+              class="titulo-calendario text-2xl md:text-3xl font-bold uppercase text-[var(--color-primary)]"
+            >
+              Información práctica del curso
+            </h2>
+            <p class="mt-4 mx-auto">
+              Hemos reunido en este bloque la información más consultada sobre
+              el curso, la documentación habitual para tramitar la licencia F y
+              la organización de las clases.
+            </p>
+          </div>
+
+          <div class="accordion" id="accordionCurso">
+            <!-- PANEL 1 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseIncluye"
+                  aria-expanded="false"
+                  aria-controls="collapseIncluye"
+                >
+                  Qué incluye el curso
+                </button>
+              </h2>
+              <div
+                id="collapseIncluye"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionCurso"
+              >
+                <div class="accordion-body">
+                  <p>
+                    El programa combina formación teórica y práctica para que el
+                    alumno avance con seguridad desde el primer día.
+                  </p>
+                  <ul>
+                    <li>
+                      Clases teóricas sobre normativa, seguridad, reglamento y
+                      manejo responsable del arma.
+                    </li>
+                    <li>
+                      Sesiones prácticas supervisadas en galería de 25 metros,
+                      con seguimiento individual del instructor.
+                    </li>
+                    <li>
+                      Material de apoyo, tests de preparación y orientación para
+                      el examen oficial.
+                    </li>
+                    <li>
+                      Acompañamiento durante el proceso administrativo y
+                      resolución de dudas antes de la convocatoria.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 2 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseRequisitos"
+                  aria-expanded="false"
+                  aria-controls="collapseRequisitos"
+                >
+                  Requisitos
+                </button>
+              </h2>
+              <div
+                id="collapseRequisitos"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionCurso"
+              >
+                <div class="accordion-body">
+                  <p>
+                    Para la tramitación de la licencia F suele pedirse la
+                    documentación habitual de identificación, aptitud
+                    psicofísica y vinculación federativa. Nuestro equipo te
+                    ayuda a revisar cada paso antes de presentar la solicitud.
+                  </p>
+                  <ul>
+                    <li>DNI o NIE en vigor.</li>
+                    <li>
+                      Certificado médico o psicotécnico expedido por un centro
+                      autorizado.
+                    </li>
+                    <li>
+                      Tramitación o acreditación de la licencia federativa de
+                      tiro deportivo.
+                    </li>
+                    <li>
+                      Superación de la parte teórica y práctica requerida en la
+                      convocatoria correspondiente.
+                    </li>
+                  </ul>
+                  <p>
+                    La documentación exacta puede actualizarse según la
+                    convocatoria o la Intervención de Armas, por lo que siempre
+                    confirmamos contigo los requisitos vigentes antes del
+                    examen.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseHorarios"
+                  aria-expanded="false"
+                  aria-controls="collapseHorarios"
+                >
+                  Horarios
+                </button>
+              </h2>
+              <div
+                id="collapseHorarios"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionCurso"
+              >
+                <div class="accordion-body">
+                  <p>
+                    La parte teórica se realiza online y las prácticas se
+                    organizan en grupos reducidos para facilitar la corrección
+                    técnica y la asignación del arma.
+                  </p>
+                  <ul>
+                    <li>
+                      Teoría por videoconferencia los jueves a partir de las
+                      20:30 h.
+                    </li>
+                    <li>
+                      Prácticas en Roquetas y Gádor, normalmente en sesiones de
+                      una hora asignadas previamente.
+                    </li>
+                    <li>
+                      El alumno mantiene el mismo campo y franja horaria durante
+                      las prácticas para asegurar continuidad.
+                    </li>
+                    <li>
+                      Las fechas completas de septiembre y octubre están
+                      detalladas en el bloque de calendario superior.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 4 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFAQ"
+                  aria-expanded="false"
+                  aria-controls="collapseFAQ"
+                >
+                  Preguntas frecuentes
+                </button>
+              </h2>
+              <div
+                id="collapseFAQ"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionCurso"
+              >
+                <div class="accordion-body">
+                  <p>
+                    <strong>¿Necesito experiencia previa?</strong><br />
+                    No. El curso está planteado para alumnos que empiezan desde
+                    cero y para personas que quieren regularizar su práctica.
+                  </p>
+                  <p class="mt-3">
+                    <strong>¿El precio incluye examen y prácticas?</strong
+                    ><br />
+                    Sí, el curso contempla la preparación teórica, las prácticas
+                    programadas y la orientación para la convocatoria oficial.
+                  </p>
+                  <p class="mt-3">
+                    <strong
+                      >¿Puedo resolver dudas fuera del horario de clase?</strong
+                    ><br />
+                    Sí. El profesorado atiende consultas relacionadas con
+                    temario, documentación y organización del examen.
+                  </p>
+                  <p class="mt-3">
+                    <strong>¿Cuándo sabré mi turno de prácticas?</strong><br />
+                    Una vez formalizada la inscripción, asignamos el campo y la
+                    franja más adecuada según disponibilidad y nivel del alumno.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="py-8 px-6 md:px-16"
+        aria-labelledby="valoracion-curso-heading"
+      >
+        <div class="container mx-auto">
+          <div class="valoracion-box">
+            <h2
+              id="valoracion-curso-heading"
+              class="text-2xl md:text-3xl font-bold uppercase"
+            >
+              Valoración del curso
+            </h2>
+            <p class="valoracion-copy mt-3">
+              Valora este curso y ayúdanos a mejorar.
+            </p>
+
+            <div
+              class="valoracion-estrellas mt-4"
+              role="radiogroup"
+              aria-label="Valora tu experiencia del curso"
+              data-output="valoracionCursoResultado"
+            >
+              <button
+                type="button"
+                class="valoracion-estrella"
+                data-rating-value="1"
+                aria-label="1 estrella"
+                aria-pressed="false"
+              >
+                ★
+              </button>
+              <button
+                type="button"
+                class="valoracion-estrella"
+                data-rating-value="2"
+                aria-label="2 estrellas"
+                aria-pressed="false"
+              >
+                ★
+              </button>
+              <button
+                type="button"
+                class="valoracion-estrella"
+                data-rating-value="3"
+                aria-label="3 estrellas"
+                aria-pressed="false"
+              >
+                ★
+              </button>
+              <button
+                type="button"
+                class="valoracion-estrella"
+                data-rating-value="4"
+                aria-label="4 estrellas"
+                aria-pressed="false"
+              >
+                ★
+              </button>
+              <button
+                type="button"
+                class="valoracion-estrella"
+                data-rating-value="5"
+                aria-label="5 estrellas"
+                aria-pressed="false"
+              >
+                ★
+              </button>
+
+              <span
+                id="valoracionCursoResultado"
+                class="valoracion-resultado"
+                aria-live="polite"
+              >
+                Selecciona una puntuación.
+              </span>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -728,5 +1209,27 @@
         form.submit();
       });
     </script>
+
+    <!-- =========================================================
+         NOTIFICACIÓN CARRITO
+         ========================================================= -->
+    <div
+      id="notificacion-carrito"
+      class="alert alert-success alert-dismissible fade"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <i data-lucide="check-circle" class="w-5 h-5 mr-2" aria-hidden="true"></i>
+      Curso añadido al carrito
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Cerrar notificación"
+      >
+        ×
+      </button>
+    </div>
   </body>
 </html>

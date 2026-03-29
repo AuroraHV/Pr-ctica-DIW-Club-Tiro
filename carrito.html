@@ -117,14 +117,48 @@
 
           <!-- ICONOS Y MENÚ -->
           <div class="flex items-center gap-4">
-            <a
-              href="carrito.html"
-              class="icon-btn"
-              title="Carrito"
-              aria-label="Ver carrito de compra"
-            >
-              <i data-lucide="shopping-cart" aria-hidden="true"></i>
-            </a>
+            <div class="carrito-dropdown-wrapper">
+              <button
+                id="cartToggle"
+                class="icon-btn"
+                type="button"
+                title="Carrito"
+                aria-label="Ver resumen del carrito"
+                aria-expanded="false"
+                aria-controls="cartDropdown"
+              >
+                <i data-lucide="shopping-cart" aria-hidden="true"></i>
+              </button>
+              <div
+                id="cartDropdown"
+                class="cart-dropdown"
+                role="region"
+                aria-label="Resumen del carrito"
+                aria-hidden="true"
+              >
+                <div class="cart-dropdown-header">
+                  <h3 class="cart-dropdown-title">Mi carrito</h3>
+                  <button
+                    type="button"
+                    class="cart-dropdown-close"
+                    aria-label="Cerrar resumen del carrito"
+                  >
+                    ×
+                  </button>
+                </div>
+                <ul class="cart-dropdown-list" data-cart-summary-list></ul>
+                <div class="cart-dropdown-total">
+                  <span>Total</span>
+                  <span data-cart-summary-total>0 €</span>
+                </div>
+                <p class="cart-dropdown-empty" data-cart-summary-empty hidden>
+                  Tu carrito está vacío.
+                </p>
+                <a href="carrito.html" class="btn cart-dropdown-btn"
+                  >Ver carrito completo</a
+                >
+              </div>
+            </div>
             <button
               class="icon-btn"
               title="Usuario"
@@ -333,89 +367,34 @@
       <section class="py-14 px-6 md:px-16">
         <div class="container mx-auto max-w-5xl">
           <article class="card-fondo p-8">
-            <!-- TITULO -->
             <h3 class="text-center mb-8">TU CARRITO</h3>
 
-            <!-- PRODUCTO -->
-            <div
-              class="flex flex-col md:flex-row items-center gap-6 border-b pb-6 mb-6"
-            >
-              <img
-                src="img/curso-pistola-pequeña.png"
-                srcset="
-                  img/curso-pistola-pequeña.png  300w,
-                  img/curso-pistola-mediana.png  800w,
-                  img/curso-pistola-grande.png  1600w
-                "
-                sizes="(max-width: 768px) 100vw, 240px"
-                loading="lazy"
-                decoding="async"
-                alt="Curso Licencia F Pistola"
-                onclick="openLightbox('img/curso-pistola-grande.png')"
-                class="w-full md:w-60 rounded-md object-cover self-center cursor-zoom-in"
-              />
+            <div id="cartItemsContainer" class="cart-items-container"></div>
 
-              <!-- Info -->
-              <div class="flex-1 text-center md:text-left">
-                <h4 class="font-bold mb-2">
-                  Curso Licencia F — Pistola Standard 25M
-                </h4>
+            <p id="cartEmptyState" class="cart-empty-state" hidden>
+              Tu carrito está vacío. Añade un curso para verlo aquí.
+            </p>
 
-                <p class="text-sm opacity-80">
-                  Formación oficial para licencia deportiva
-                </p>
+            <div id="cartFooterSummary">
+              <div class="flex justify-between items-center mb-8">
+                <span class="font-bold text-lg">Total</span>
+                <span class="font-bold text-xl" id="cartTotalValue">0 €</span>
               </div>
 
-              <!-- Precio -->
-              <div class="font-bold text-lg">350 €</div>
+              <div class="flex flex-col md:flex-row gap-4 justify-end">
+                <a href="producto.html" class="btn"> Seguir comprando </a>
 
-              <div class="flex items-center gap-3">
-                <!-- ELIMINAR -->
-                <button
-                  class="cart-action"
-                  title="Eliminar producto"
-                  aria-label="Eliminar producto"
-                >
-                  <!-- SVG INLINE -->
-                  <svg
-                    viewBox="0 0 10.156073 10.219604"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="cart-icon"
-                  >
-                    <g transform="rotate(45,128.33668,-74.791173)">
-                      <path
-                        fill="currentColor"
-                        d="m 96.964012,62.352184 h 1.272494 v 12.979434 h -1.272494 z"
-                      />
-                      <path
-                        fill="currentColor"
-                        transform="rotate(90)"
-                        d="m 68.25058,-104.24583 h 1.272493 v 12.979437 H 68.25058 Z"
-                      />
-                    </g>
-                  </svg>
-                </button>
+                <button class="btn">Finalizar compra</button>
               </div>
             </div>
 
-            <!-- TOTAL -->
-            <div class="flex justify-between items-center mb-8">
-              <span class="font-bold text-lg">Total</span>
-              <span class="font-bold text-xl">350 €</span>
-            </div>
-
-            <!-- BOTONES -->
-            <div class="flex flex-col md:flex-row gap-4 justify-end">
-              <a href="producto.html" class="btn"> Seguir comprando </a>
-
-              <button class="btn">Finalizar compra</button>
-            </div>
-            <!-- FLECHA ACCIÓN -->
             <div class="cart-arrow-container flex justify-end">
               <button
                 class="cart-action arrow-down"
                 title="Atrás"
                 aria-label="Atrás"
+                type="button"
+                onclick="history.back()"
               >
                 <svg
                   viewBox="0 0 11.943804 11.423338"
@@ -457,6 +436,64 @@
         </div>
       </section>
     </main>
+
+    <!-- =========================================================
+         MODAL ELIMINAR PRODUCTO
+         ========================================================= -->
+    <div
+      id="modalEliminar"
+      class="bs-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalEliminarLabel"
+      aria-hidden="true"
+    >
+      <div class="bs-modal-dialog">
+        <div class="bs-modal-content">
+          <!-- Header -->
+          <div class="bs-modal-header">
+            <h5 class="bs-modal-title" id="modalEliminarLabel">
+              <i
+                data-lucide="trash-2"
+                class="w-5 h-5 mr-2"
+                aria-hidden="true"
+              ></i>
+              Eliminar producto
+            </h5>
+            <button
+              type="button"
+              class="bs-btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            >
+              &times;
+            </button>
+          </div>
+          <!-- Body -->
+          <div class="bs-modal-body">
+            <p>
+              ¿Seguro que quieres eliminar
+              <strong id="modalProductoNombre"></strong> del carrito?
+            </p>
+          </div>
+          <!-- Footer -->
+          <div class="bs-modal-footer">
+            <button
+              type="button"
+              class="btn btn-secundario"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn" id="modalConfirmarEliminar">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Backdrop del modal -->
+    <div id="modalBackdrop" class="bs-modal-backdrop" aria-hidden="true"></div>
 
     <!-- LIGHTBOX IMAGEN PRODUCTO -->
     <div

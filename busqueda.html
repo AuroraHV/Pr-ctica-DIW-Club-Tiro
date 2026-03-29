@@ -135,14 +135,48 @@
 
           <!-- ICONOS Y MENÚ -->
           <div class="flex items-center gap-4">
-            <a
-              href="carrito.html"
-              class="icon-btn"
-              title="Carrito"
-              aria-label="Ver carrito de compra"
-            >
-              <i data-lucide="shopping-cart" aria-hidden="true"></i>
-            </a>
+            <div class="carrito-dropdown-wrapper">
+              <button
+                id="cartToggle"
+                class="icon-btn"
+                type="button"
+                title="Carrito"
+                aria-label="Ver resumen del carrito"
+                aria-expanded="false"
+                aria-controls="cartDropdown"
+              >
+                <i data-lucide="shopping-cart" aria-hidden="true"></i>
+              </button>
+              <div
+                id="cartDropdown"
+                class="cart-dropdown"
+                role="region"
+                aria-label="Resumen del carrito"
+                aria-hidden="true"
+              >
+                <div class="cart-dropdown-header">
+                  <h3 class="cart-dropdown-title">Mi carrito</h3>
+                  <button
+                    type="button"
+                    class="cart-dropdown-close"
+                    aria-label="Cerrar resumen del carrito"
+                  >
+                    ×
+                  </button>
+                </div>
+                <ul class="cart-dropdown-list" data-cart-summary-list></ul>
+                <div class="cart-dropdown-total">
+                  <span>Total</span>
+                  <span data-cart-summary-total>0 €</span>
+                </div>
+                <p class="cart-dropdown-empty" data-cart-summary-empty hidden>
+                  Tu carrito está vacío.
+                </p>
+                <a href="carrito.html" class="btn cart-dropdown-btn"
+                  >Ver carrito completo</a
+                >
+              </div>
+            </div>
             <button
               class="icon-btn"
               title="Usuario"
@@ -325,7 +359,7 @@
     <main id="contenido-principal" class="page-busqueda">
       <!-- HERO -->
       <section
-        class="relative h-[24vh] md:h-[28vh] bg-cover bg-center flex items-center"
+        class="relative borde-animado h-[24vh] md:h-[28vh] bg-cover bg-center flex items-center"
         style="background-image: url(&quot;img/hero-busqueda.png&quot;)"
         aria-labelledby="hero-busqueda-heading"
       >
@@ -346,6 +380,8 @@
           </p>
         </div>
       </section>
+
+      <div class="separador-animado"></div>
 
       <!-- FORMULARIO DE BÚSQUEDA -->
       <section class="py-12 px-6 md:px-16 bg-gray-100 text-center">
@@ -425,7 +461,8 @@
                 <span>350 €</span>
                 <div class="flex items-center gap-3">
                   <button
-                    class="btn icono-circular"
+                    class="btn icono-circular js-add-to-cart"
+                    data-cart-id="licencia-f-carabina-50m"
                     title="Añadir al carrito"
                     aria-label="Añadir curso Licencia F Carabina 50 M al carrito"
                     type="button"
@@ -474,7 +511,8 @@
                 <span>350 €</span>
                 <div class="flex items-center gap-3">
                   <button
-                    class="btn icono-circular"
+                    class="btn icono-circular js-add-to-cart"
+                    data-cart-id="licencia-e-carabina-50m"
                     title="Añadir al carrito"
                     aria-label="Añadir curso Licencia E Carabina 50 M al carrito"
                     type="button"
@@ -523,7 +561,8 @@
                 <span>400 €</span>
                 <div class="flex items-center gap-3">
                   <button
-                    class="btn icono-circular"
+                    class="btn icono-circular js-add-to-cart"
+                    data-cart-id="licencia-d-carabina-50m"
                     title="Añadir al carrito"
                     aria-label="Añadir curso Licencia D Carabina 50 M al carrito"
                     type="button"
@@ -572,7 +611,8 @@
                 <span>450 €</span>
                 <div class="flex items-center gap-3">
                   <button
-                    class="btn icono-circular"
+                    class="btn icono-circular js-add-to-cart"
+                    data-cart-id="curso-avanzado-carabina-precision"
                     title="Añadir al carrito"
                     aria-label="Añadir curso avanzado de carabina al carrito"
                     type="button"
@@ -788,5 +828,27 @@
         form.submit();
       });
     </script>
+
+    <!-- =========================================================
+         NOTIFICACIÓN CARRITO
+         ========================================================= -->
+    <div
+      id="notificacion-carrito"
+      class="alert alert-success alert-dismissible fade"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <i data-lucide="check-circle" class="w-5 h-5 mr-2" aria-hidden="true"></i>
+      Curso añadido al carrito
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Cerrar notificación"
+      >
+        ×
+      </button>
+    </div>
   </body>
 </html>
